@@ -28,6 +28,8 @@ let productos=[
     ] 
 let cantidad
 let compras=[]
+let Tcompras=[]
+let Gcompras=[]
 let flag=1
 let flag1=0
 let stringCompras=""
@@ -57,19 +59,25 @@ class Producto{
 }
 //------------------------------COMPRAR--------------------------------------
 function loadCompra(){
+    const contenedor=document.createElement("div")
+    contenedor.classList.add('bg-dark') 
     const texto = document.getElementById('texto')
     const h3 = document.getElementsByTagName('h3')[0]
     h3.className = "titulo"
     h3.innerText = "Ofertas por el mes de Halloween"
+    contenedor.append(h3)
+    contenedor.append(h3)
+    contenedor.append(h3)
     texto.append(h3)
     const contenedorProductos = document.getElementById('productos')
-//INTERACCION CON HTML
+    //INTERACCION CON HTML
     compras.forEach( (prod) => {
         const div = document.createElement('div')
         div.id = `producto${prod.nombre}`
         // TEMPLATE STRING
         div.innerHTML = `
             <h3 class="titulo">${prod.nombre}</h3>
+            <p></p>
             <p>Precio: $${prod.precio}</p>
             <p>Stock: ${prod.stock}</p>
         `
@@ -87,6 +95,7 @@ function loadCompra(){
     compras=[]
 }
 function doCompra(){
+    
     while(flag==0){
         //------------------------------Validar productos------------------------------
         flag1=prompt("Ingrese el nro del producto que desea llevar: (del 1 al 5)")
@@ -104,6 +113,7 @@ function doCompra(){
         const producto1= new Producto(productos[flag1-1].nombre,productos[flag1-1].precioG,productos[flag1-1].stockG,productos[flag1-1].stockG)
         //------------------------------Añadir producto comprado al array------------------------------
         compras.push(producto1)
+        Tcompras.push(producto1)
         //------------------------------Reporte de Salidad de Datos------------------------------
         producto1.restarStock(cantidad)
         producto1.consultarStock()
@@ -117,6 +127,10 @@ function doCompra(){
             flag=prompt("Desea realizar otra compra¿? (1:NO 0:SI)")
         }
     }
+    
+    localStorage.setItem('Compras',JSON.stringify(Tcompras))
+    Gcompras=localStorage.getItem('Compras')
+    console.log(Gcompras)
     loadCompra();
 }
 //------------------------------Reporte-PreCargado------------------------------

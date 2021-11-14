@@ -72,8 +72,8 @@ function loadCompra(arrGcompraz){
     texto.append(h3)
     const contenedorProductos = document.getElementById('productos')
     //INTERACCION CON HTML
-    if(arrGcompras!=null){
-        arrGcompras.forEach( (prod) => {
+    if(arrGcompraz!=null){
+        arrGcompraz.forEach( (prod) => {
             const div = document.createElement('div')
             div.id = `producto${prod.nombre}`
             // TEMPLATE STRING
@@ -104,6 +104,9 @@ function loadCompra(arrGcompraz){
     const input = document.getElementById('input')
     console.log(input.value)
     */
+    console.log("REGISTRO")
+    console.log(arrGcompraz)
+    console.log(compras)
     for (let compra of compras) {
         stringCompras+=compra.nombre+" a "+compra.mostrarPrecio(compra.stock)+" soles."+"\n"
         totalPrecio+=parseFloat(compra.mostrarPrecio(compra.stock))
@@ -146,8 +149,9 @@ function doCompra(){
     }
     let arrGcompraz=[]
     console.log(localStorage.getItem('Compras')+" Hola")
-    Gcompras=localStorage.getItem('Compras')
-    arrGcompras=JSON.parse(Gcompras)
+    Gcompras=localStorage.getItem('Compras') //Guardar el arreglo provisionalmente en string
+    arrGcompraz=JSON.parse(Gcompras) //Conventirlo el string a arreglo 
+    /*
     if(arrGcompras!=null){
         console.log(arrGcompras)
         for (let producto of compras) {
@@ -155,10 +159,11 @@ function doCompra(){
             console.log(arrGcompras)
         }
     }
-    console.log(arrGcompras)
+    */
+    //Guardar en el nuevo arreglo los objetos de la nueva consulta
+    console.log(arrGcompraz)
         for (let producto of compras) {
-            arrGcompras.push(producto)
-            console.log(arrGcompras)
+            arrGcompraz.push(producto)
         }
     /*
     arrGcompras.forEach( (prod) => {
@@ -174,6 +179,7 @@ function doCompra(){
         contenedorProductos.append(div)
     })
     */
+    //Setearlo en el local storage
     localStorage.setItem('Compras',JSON.stringify(arrGcompraz))
     
     console.log(Gcompras)

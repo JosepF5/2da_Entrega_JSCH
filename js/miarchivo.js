@@ -30,6 +30,7 @@ let cantidad
 let compras=[]
 let Tcompras=[]
 let Gcompras=[]
+let arrGcompras=[]
 let flag=1
 let flag1=0
 let stringCompras=""
@@ -58,7 +59,7 @@ class Producto{
     }
 }
 //------------------------------COMPRAR--------------------------------------
-function loadCompra(){
+function loadCompra(arrGcompraz){
     const contenedor=document.createElement("div")
     contenedor.classList.add('bg-dark') 
     const texto = document.getElementById('texto')
@@ -71,7 +72,22 @@ function loadCompra(){
     texto.append(h3)
     const contenedorProductos = document.getElementById('productos')
     //INTERACCION CON HTML
-    compras.forEach( (prod) => {
+    if(arrGcompras!=null){
+        arrGcompras.forEach( (prod) => {
+            const div = document.createElement('div')
+            div.id = `producto${prod.nombre}`
+            // TEMPLATE STRING
+            div.innerHTML = `
+                <h3 class="titulo">${prod.nombre}</h3>
+                <p></p>
+                <p>Precio: $${prod.precio}</p>
+                <p>Stock: ${prod.stock}</p>
+            `
+            contenedorProductos.append(div)
+        })
+    }
+    /*
+    arrGcompraz.forEach( (prod) => {
         const div = document.createElement('div')
         div.id = `producto${prod.nombre}`
         // TEMPLATE STRING
@@ -83,6 +99,7 @@ function loadCompra(){
         `
         contenedorProductos.append(div)
     })
+    */
     /*
     const input = document.getElementById('input')
     console.log(input.value)
@@ -119,7 +136,7 @@ function doCompra(){
         producto1.consultarStock()
         producto1.calcularPrecio(cantidad)
         //------------------------------Reporte-PostCargado------------------------------
-        
+
         //------------------------------ValidarCiclo------------------------------
         flag=prompt("Desea realizar otra compra¿? (1:NO 0:SI)")
         while(flag!=1 && flag!=0){
@@ -127,11 +144,60 @@ function doCompra(){
             flag=prompt("Desea realizar otra compra¿? (1:NO 0:SI)")
         }
     }
-    
-    localStorage.setItem('Compras',JSON.stringify(Tcompras))
+    let arrGcompraz=[]
+    console.log(localStorage.getItem('Compras')+" Hola")
     Gcompras=localStorage.getItem('Compras')
+    arrGcompras=JSON.parse(Gcompras)
+    if(arrGcompras!=null){
+        console.log(arrGcompras)
+        for (let producto of compras) {
+            arrGcompras.push(producto)
+            console.log(arrGcompras)
+        }
+    }
+    console.log(arrGcompras)
+        for (let producto of compras) {
+            arrGcompras.push(producto)
+            console.log(arrGcompras)
+        }
+    /*
+    arrGcompras.forEach( (prod) => {
+        const div = document.createElement('div')
+        div.id = `producto${prod.nombre}`
+        // TEMPLATE STRING
+        div.innerHTML = `
+            <h3 class="titulo">${prod.nombre}</h3>
+            <p></p>
+            <p>Precio: $${prod.precio}</p>
+            <p>Stock: ${prod.stock}</p>
+        `
+        contenedorProductos.append(div)
+    })
+    */
+    localStorage.setItem('Compras',JSON.stringify(arrGcompraz))
+    
     console.log(Gcompras)
-    loadCompra();
+    console.log(arrGcompras)
+    console.log(arrGcompraz)
+    console.log(localStorage.getItem('Compras'))
+    console.log(typeof(Gcompras))
+    console.log(typeof(arrGcompras))
+    console.log(typeof(arrGcompraz))
+    console.log(typeof(Tcompras))
+    /*
+    arrGcompras.forEach( (prod) => {
+        const div = document.createElement('div')
+        div.id = `producto${prod.nombre}`
+        // TEMPLATE STRING
+        div.innerHTML = `
+            <h3 class="titulo">${prod.nombre}</h3>
+            <p></p>
+            <p>Precio: $${prod.precio}</p>
+            <p>Stock: ${prod.stock}</p>
+        `
+    })
+    */
+    loadCompra(arrGcompraz);
 }
 //------------------------------Reporte-PreCargado------------------------------
 /*

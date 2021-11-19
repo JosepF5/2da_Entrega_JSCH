@@ -60,22 +60,32 @@ class Producto{
 }
 //------------------------------COMPRAR--------------------------------------
 function loadCompra(arrGcompraz){
-    const texto = $(`#texto`)
-    const h3 = $(`h3`)
+    const h3 = $(`.advertisement`)
+    let idProducto=1
     h3.addClass('titulo')
-    h3.append("Ofertas por el mes de Halloween")
-    texto.append(h3)
     //INTERACCION CON HTML
     if(arrGcompraz!=null){
         arrGcompraz.forEach( (prod) => {
             $('#productos').append(`
                 <h3 class="titulo">${prod.nombre}</h3>
-                <p></p>
-                <p>Precio: $${prod.precio}</p>
-                <p>Stock: ${prod.stock}</p>
-                <p>Creada el: ${ new Date().toLocaleString() }</p>
+                <div id="info0${idProducto}" style="display:none">
+                    <p>Precio: $${prod.precio}</p>
+                    <p>Stock: ${prod.stock}</p>
+                </div>
+                <button type="button" class="btn btn-primary btn-lg m-2" id="btn0${idProducto}Plus">+ Info</button>
+                <button type="button" class="btn btn-primary btn-lg m-2" id="btn0${idProducto}Minus">- Info</button>
                 <br>
             `)
+            idProducto++
+        })
+    }
+    for (let i = 1; i < idProducto; i++) {
+        $('#btn0'+i+'Plus').click(()=>{
+            $('#info0'+i).fadeIn(1000)
+        })
+        
+        $('#btn0'+i+'Minus').click(()=>{
+            $('#info0'+i).fadeOut(1000)
         })
     }
     for (let compra of compras) {

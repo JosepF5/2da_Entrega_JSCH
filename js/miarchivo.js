@@ -146,3 +146,16 @@ boton.click( () => {
     flag=0;
     doCompra();
 })
+
+$.get('..//js/productos.json', (resp) => {
+
+    console.log(resp)
+
+    resp.forEach((prod) => {
+        $('#productosX').append(`
+            <li>
+                <h3 class="titulo">Producto: ${prod.nombre}</h3>
+            </li>
+        `)
+    })
+})

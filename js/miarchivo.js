@@ -1,49 +1,28 @@
 //------------------------------Declaracion de variables------------------------------
-
-let productos=[
-    {
-        "nombre": "Mouse",
-        "precioG": 50,
-        "stockG":12,
-        "id":1,
-        "img": "..//images/mouse.png"
-    },
-    {
-        nombre: "Teclado",
-        precioG: 75.5,
-        stockG:35,
-        id:2,
-        img: "..//images/teclado.png"
-    },
-    {
-        nombre: "Telefono",
-        precioG: 400,
-        stockG:14,
-        id:3,
-        img: "..//images/telefono.png"
-    },
-    {
-        nombre: "PS4",
-        precioG: 999,
-        stockG:78,
-        id:4,
-        img: "..//images/ps4.png"
-    },
-    {
-        nombre: "XBOX",
-        precioG: 1250,
-        stockG:45,
-        id:5,
-        img: "..//images/xbox.png"
-    },
-    {
-        nombre: "Nintendo Switch",
-        precioG: 486.50,
-        stockG:69,
-        id:6,
-        img: "..//images/nintendo_switch.png"
-    }
-] 
+let productos=[]
+$.get('..//js/productos.json', (resp) => {
+    productos = resp
+    productos.forEach((prod) => {
+        $('#productosX').append(`
+            <div class="col-sm-6 text-dark p-1 d-flex justify-content-center">
+            <div class="card mb-5" style="max-width: 540px;">
+              <div class="row g-0">
+                <div class="col-md-4 d-flex align-items-center">
+                  <img src=${prod.img} class="img-fluid rounded-start " alt="...">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title titulo__Cartas">${prod.nombre}</h5>
+                    <p class="card-text"><small class="text-muted">$${prod.precioG}</small></p>
+                    <a href="#" class="btn btn-warning">Agregar al Carrito</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+        `)
+    })
+})
  
 let cantidad
 let compras=[]
@@ -165,28 +144,4 @@ const boton = $(`#btnComprar`)
 boton.click( () => {
     flag=0;
     doCompra();
-})
-
-$.get('..//js/productos.json', (resp) => {
-
-    resp.forEach((prod) => {
-        $('#productosX').append(`
-            <div class="col-sm-6 text-dark p-1 d-flex justify-content-center">
-            <div class="card mb-5" style="max-width: 540px;">
-              <div class="row g-0">
-                <div class="col-md-4 d-flex align-items-center">
-                  <img src=${prod.img} class="img-fluid rounded-start " alt="...">
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title titulo__Cartas">${prod.nombre}</h5>
-                    <p class="card-text"><small class="text-muted">$${prod.precioG}</small></p>
-                    <a href="#" class="btn btn-warning">Agregar al Carrito</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            </div>
-        `)
-    })
 })

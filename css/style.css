@@ -130,3 +130,20 @@ h2 {
 
 .bg-danger {
   background-color: #212529 !important; }
+
+#boton-carrito {
+  border: none;
+  color: #B32327;
+  font-size: 20px;
+  background-color: white;
+  border-radius: 25%;
+  padding: 10px 20px;
+  transition: all .3s; }
+
+#boton-carrito:hover {
+  cursor: pointer;
+  color: white;
+  background-color: #B32327; }
+
+#boton-carrito:focus {
+  outline: none; }

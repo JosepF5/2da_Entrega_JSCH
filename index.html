@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="css/style.css">
     <title>JF5 STORE | Inicio</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script defer src="js/miarchivo.js"></script>
+    <script defer src="js/miarchivo_v2.js"></script>
+    <script defer src="js/modal.js"></script>
 </head>
 <body>
   <header class="header">
@@ -23,16 +24,17 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
+                <button id="boton-carrito"><i class="fas fa-shopping-cart"></i><span id="contadorCarrito">0</span></button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                   <div class="navg navbar-nav w-100 justify-content-center animate__animated animate__bounceInDown" >
                     <a href="index.html" class="nav-item nav-link">Inicio</a>
                     <a href="#" class="nav-item nav-link">Nosotros</a>
                     <a href="#" class="nav-item nav-link">Tienda ONLINE</a>
                     <a href="#" class="nav-item nav-link">Combos</a>
-                    <a href=#" class="nav-item nav-link">Contacto</a>
+                    <a href="#" class="nav-item nav-link">Contacto</a>
                   </div>
                 </div>
-                <button id="boton-carrito"><i class="fas fa-shopping-cart"></i><span id="contadorCarrito">0</span></button>
+                
               </nav>
               
         </div>
@@ -42,7 +44,7 @@
             <div class="row">
                 <div class="texto_portada col-sm-8 animate__animated animate__backInDown p-3">
                     <h2><span>JF5</span>STORE</h2>
-                    <p>
+                    <p class="mensaje_empresa">
                       Tienda de informática y tecnología con 16 años de experiencia.
                       El mejor precio con el mejor servicio; especialistas en productos Gamer.
                     </p>
@@ -53,7 +55,7 @@
     </div>
   </header>
   <div class="container-fluid text-center bg-danger text-light">
-    <div class="row mx-auto" id="productosX">
+    <div class="row mx-auto" id="contenedor-productos">
       <div class="col-12 p-5 pb-0">
         <h1 class="titulo__Secciones animate__animated animate__fadeInDown">Nuestros Productos</h1>
       </div>
@@ -61,18 +63,39 @@
     <div class="row text-dark">
     </div>
   </div>
-    <div class="bg-danger text-center p-5">
-        <!--<input type="text" id="input" placeholder="Buscar productos">-->
-        <h1 class="titulo__Compras">CARRITO DE COMPRAS</h1>
-        <div id="texto">
-          <h3 class="advertisement">
-            Ofertas por el mes de Halloween
-          </h3>
-        </div>
-        <div id="productos" class="p-3">
-        </div>
+  <!--
+  <main id="contenedor-productos">
+
+  </main>
+-->
+  <!--
+  <div class="bg-danger text-center p-5">
+      
+      <h1 class="titulo__Compras">CARRITO DE COMPRAS</h1>
+      <div id="texto">
+        <h3 class="advertisement">
+          Ofertas por el mes de Halloween
+        </h3>
+      </div>
+      <div id="productos" class="p-3">
+      </div>
+  </div>
+-->
+  <div class="modal-contenedor">
+    <div class="modal-carrito">
+      <h3>Carrito de Compra</h3>
+      <button id="carritoCerrar"><i class="fas fa-times-circle"></i></button>
+      <div id="carrito-contenedor">
+        <!-- <div class="productoEnCarrito">
+                  <p>Buzo 1</p>
+                  <p>Precio: $1200</p>
+                  <button class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
+              </div> -->
+      </div>
+      <p class="precioProducto">Precio total: $<span id="precioTotal"></span></p>
+      <button type="button" class="btn btn-success" onclick=finalizarCompra()>FINALIZAR COMPRA</button>
     </div>
-    
+  </div>
 </body>
 <script src="assets/js/wow.min.js"></script>
 <script>

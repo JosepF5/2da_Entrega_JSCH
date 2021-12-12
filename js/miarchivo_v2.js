@@ -41,34 +41,6 @@ const carrito = JSON.parse(localStorage.getItem('Compras')) || []
 actualizarCarrito()
 
 function mostrarProductos(array) {
-    /*
-    contenedorProductos.innerHTML = ''
-
-    array.forEach( (producto) => {
-        const div = document.createElement('div')
-        div.classList.add('producto')
-        div.innerHTML = `
-        <div class="col-sm-6 text-dark p-1 d-flex justify-content-center">
-        <div class="card mb-5" style="max-width: 540px;">
-          <div class="row g-0">
-            <div class="col-md-4 d-flex align-items-center">
-              <img src=${producto.img} class="img-fluid rounded-start " alt="...">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title titulo__Cartas">${producto.nombre}</h5>
-                <p class="card-text"><small class="text-muted">$${producto.precioG}</small></p>
-                <button type="button" class="boton-agregar btn btn-warning" onclick=agregarAlCarrito(${producto.id})>Agregar al Carrito</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-        `
-        
-        contenedorProductos.appendChild(div)
-    } )
-    */
     array.forEach((prod) => {
         $('#contenedor-productos').append(`
             <div class="col-sm-6 text-dark p-1 d-flex justify-content-center">
@@ -81,7 +53,7 @@ function mostrarProductos(array) {
                   <div class="card-body">
                     <h5 class="card-title titulo__Cartas">${prod.nombre}</h5>
                     <p class="card-text"><small class="text-muted">$${prod.precioG}</small></p>
-                    <a href="#" class="btn btn-warning">Agregar al Carrito</a>
+                    <button type="button" class="btn btn-warning" onclick=agregarAlCarrito(${prod.id})>Agregar al Carrito</button>
                   </div>
                 </div>
               </div>
@@ -91,6 +63,7 @@ function mostrarProductos(array) {
     })
 }
 //------------------------------Definicion de clase "Producto"------------------------------
+/*
 class Producto{
     
     constructor(nombre,precio,stock,sFijo){
@@ -113,6 +86,7 @@ class Producto{
         return this.precio*(this.sFijo-cantidad)
     }
 }
+
 //------------------------------COMPRAR--------------------------------------
 function loadCompra(arrGcompraz){
     const h3 = $(`.advertisement`)
@@ -195,7 +169,7 @@ function doCompra(){
     localStorage.setItem('Compras',JSON.stringify(arrGcompraz))
     loadCompra(arrGcompraz);
 }
-
+*/
 function agregarAlCarrito(itemId) {
 
     let itemEnCarrito = carrito.find(el => el.id == itemId)
@@ -203,22 +177,22 @@ function agregarAlCarrito(itemId) {
     if (itemEnCarrito) {
         itemEnCarrito.cantidad += 1
     } else {
-        let {id, nombre, precio} = stockProductos.find( el => el.id == itemId )
-        carrito.push({id: id, nombre: nombre, precio: precio, cantidad: 1})
+        let {id, nombre, precioG} = productos.find( el => el.id == itemId )
+        carrito.push({id: id, nombre: nombre, precioG: precioG, stockG: 1})
     }
 
 
-    console.log(carrito)
 
     actualizarCarrito()
 }
 
 function eliminarProducto(id) {
     let productoAEliminar = carrito.find( el => el.id == id )
-
-    productoAEliminar.cantidad--
-
-    if (productoAEliminar.cantidad == 0) {
+    console.log(id)
+    console.log(productoAEliminar)
+    productoAEliminar.stockG--
+    console.log(productoAEliminar.stockG)
+    if (productoAEliminar.stockG <= 0) {
         let indice = carrito.indexOf(productoAEliminar)
         carrito.splice(indice, 1)
     }
@@ -231,13 +205,12 @@ function actualizarCarrito() {
     contenedorCarrito.innerHTML=''
 
     carrito.forEach( (producto) => {
-
         const div = document.createElement('div')
         div.classList.add('productoEnCarrito')
         div.innerHTML = `
                         <p>${producto.nombre}</p>
-                        <p>Precio: $${producto.precio * producto.cantidad}</p>
-                        <p>Cantidad: ${producto.cantidad}</p>
+                        <p>Precio: $${producto.precioG * producto.stockG}</p>
+                        <p>Cantidad: ${producto.stockG}</p>
                         <button onclick=eliminarProducto(${producto.id}) class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
                     `
 

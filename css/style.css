@@ -122,6 +122,9 @@ h2 {
   color: #f4f4f4;
   font-family: 'Mochiy Pop P One', sans-serif; }
 
+.texto_compras {
+  font-family: 'Zen Kurenaido', sans-serif; }
+
 .texto_portada {
   background-color: rgba(0, 0, 0, 0.548); }
 
@@ -236,3 +239,8 @@ h2 {
 
 .productoEnCarrito:hover {
   border-left: 5px solid #B32327; }
+
+.btn-warning:hover {
+  background-color: #157347;
+  border-color: #157347;
+  color: white; }

@@ -11,24 +11,11 @@ const cargarDatos = async () => {
 }
 
 cargarDatos()
-let cantidad
-let compras=[]
-let Tcompras=[]
-let Gcompras=[]
-let arrGcompras=[]
-let flag=1
-let flag1=0
-let stringCompras=""
-let totalPrecio=0
 
 const contenedorProductos = document.getElementById('contenedor-productos')
 const contenedorCarrito = document.getElementById('carrito-contenedor')
-const selectFiltro = document.getElementById('talles')
-const selectPrecios = document.getElementById('precios')
-
 const contadorCarrito = document.getElementById('contadorCarrito')
 const precioTotal = document.getElementById('precioTotal')
-
 const carrito = JSON.parse(localStorage.getItem('Compras')) || []
 
 actualizarCarrito()

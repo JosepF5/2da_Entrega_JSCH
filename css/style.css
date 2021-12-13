@@ -244,3 +244,12 @@ h2 {
   background-color: #157347;
   border-color: #157347;
   color: white; }
+
+.btn-secondary:hover {
+  background-color: #ffffff;
+  border-color: #000000;
+  color: black; }
+
+.botonUpdateAmount {
+  font-weight: bold;
+  font-size: 1rem; }

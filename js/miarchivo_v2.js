@@ -2,7 +2,7 @@
 let productos=[]
 
 const cargarDatos = async () => {
-    const resp = await fetch('..//js/productos.json')
+    const resp = await fetch('./js/productos.json')
     const data = await resp.json()
 
     productos = data

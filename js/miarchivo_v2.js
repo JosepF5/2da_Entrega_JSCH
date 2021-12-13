@@ -11,12 +11,6 @@ const cargarDatos = async () => {
 }
 
 cargarDatos()
-/*
-$.get('..//js/productos.json', (resp) => {
-    const data=resp
-    productos = data
-    mostrarProductos(productos)
-})*/
 let cantidad
 let compras=[]
 let Tcompras=[]

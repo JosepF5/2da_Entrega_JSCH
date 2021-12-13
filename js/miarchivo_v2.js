@@ -135,5 +135,36 @@ function actualizarCarrito() {
     contadorCarrito.innerText = carrito.length
     precioTotal.innerText = carrito.reduce( (acc, el) => acc + (el.precioG * el.stockG), 0 )
 }
+// ========= API MERCADO PAGO =============
 
-//------------------------------Reporte-PreCargado------------------------------
+const finalizarCompra = async () => {
+    const carritoToMP = carrito.map((prod) => {
+      return {
+        title: prod.nombre,
+        description: "",
+        picture_url: "",
+        category_id: prod.id,
+        quantity: prod.stockG,
+        currency_id: "ARS",
+        unit_price: prod.precioG,
+      };
+    });
+  
+    const resp = await fetch("https://api.mercadopago.com/checkout/preferences", {
+      method: "POST",
+      headers: {
+        Authorization:
+          "Bearer TEST-530625010370198-052019-70dec8c67253a7ded8355f1a098731e3-418556460",
+      },
+      body: JSON.stringify({
+        items: carritoToMP,
+        back_urls: {
+          success: window.location.href,
+          failure: window.location.href,
+        },
+      }),
+    });
+    const data = await resp.json();
+  
+    window.location.replace(data.init_point);
+  };

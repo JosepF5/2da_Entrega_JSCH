@@ -1,0 +1,44 @@
+[
+    {
+        "nombre": "Mouse",
+        "precioG": 50,
+        "stockG":12,
+        "id":1,
+        "img": "..//images/mouse.png"
+    },
+    {
+        "nombre": "Teclado",
+        "precioG": 75.5,
+        "stockG":35,
+        "id":2,
+        "img": "..//images/teclado.png"
+    },
+    {
+        "nombre": "Telefono",
+        "precioG": 400,
+        "stockG":14,
+        "id":3,
+        "img": "..//images/telefono.png"
+    },
+    {
+        "nombre": "PS4",
+        "precioG": 999,
+        "stockG":78,
+        "id":4,
+        "img": "..//images/ps4.png"
+    },
+    {
+        "nombre": "XBOX",
+        "precioG": 1250,
+        "stockG":45,
+        "id":5,
+        "img": "..//images/xbox.png"
+    },
+    {
+        "nombre": "Nintendo Switch",
+        "precioG": 486.50,
+        "stockG":69,
+        "id":6,
+        "img": "..//images/nintendo_switch.png"
+    }
+] 

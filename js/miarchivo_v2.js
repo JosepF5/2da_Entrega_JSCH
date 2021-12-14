@@ -1,17 +1,14 @@
 //------------------------------Declaracion de variables------------------------------
 let productos=[]
-
 const cargarDatos = async () => {
     const resp = await fetch('./js/productos.json')
     const data = await resp.json()
 
     productos = data
     mostrarProductos(productos)
-    console.log("hola")
 }
-
 cargarDatos()
-
+//------------------------------Declaracion de variables------------------------------
 const contenedorProductos = document.getElementById('contenedor-productos')
 const contenedorCarrito = document.getElementById('carrito-contenedor')
 const contadorCarrito = document.getElementById('contadorCarrito')
@@ -19,7 +16,8 @@ const precioTotal = document.getElementById('precioTotal')
 const carrito = JSON.parse(localStorage.getItem('Compras')) || []
 
 actualizarCarrito()
-
+//------------------------------Funciones------------------------------
+//MostrarProductos
 function mostrarProductos(array) {
     array.forEach((prod) => {
         $('#contenedor-productos').append(`
@@ -46,7 +44,7 @@ function mostrarProductos(array) {
         `)
     })
 }
-//------------------------------Aumentar-Disminuir Monto de Productos------------------------------
+//Aumentar-Disminuir Monto de Productos
 function plusAmount(id) {
     const cantidad = document.getElementById('cantidadProducto'+id)
     let producto = productos.find( el => el.id == id )
@@ -61,12 +59,9 @@ function minusAmount(id) {
     }
     
 }
-//------------------------------CRUD CARRITO DE COMPRA------------------------------
-
+//CRUD CARRITO DE COMPRA
 function agregarAlCarrito(itemId) {
-
     let itemEnCarrito = carrito.find(el => el.id == itemId)
-
     if (itemEnCarrito) {
         itemEnCarrito.cantidad += 1
     } else {
@@ -74,14 +69,11 @@ function agregarAlCarrito(itemId) {
         const cantidad = document.getElementById('cantidadProducto'+id)
         carrito.push({id: id, nombre: nombre, precioG: precioG, stockG: parseInt(cantidad.innerText)})
         let producto = productos.find( el => el.id == itemId )
-        console.log(producto.stockG)
         producto.stockG -= parseInt(cantidad.innerText)
-        console.log(producto.stockG)
         cantidad.innerText = 1
     }
     actualizarCarrito()
 }
-
 function eliminarProducto(id) {
     let productoAEliminar = carrito.find( el => el.id == id )
     productoAEliminar.stockG--
@@ -89,11 +81,8 @@ function eliminarProducto(id) {
         let indice = carrito.indexOf(productoAEliminar)
         carrito.splice(indice, 1)
     }
-
     actualizarCarrito()
 }
-
-
 function actualizarCarrito() {
     contenedorCarrito.innerHTML=''
 
@@ -110,14 +99,11 @@ function actualizarCarrito() {
 
         contenedorCarrito.appendChild(div)
     })
-
     localStorage.setItem('Compras', JSON.stringify(carrito))
-
     contadorCarrito.innerText = carrito.length
     precioTotal.innerText = carrito.reduce( (acc, el) => acc + (el.precioG * el.stockG), 0 )
 }
-// ========= API MERCADO PAGO =============
-
+//------------------------API MERCADO PAGO-----------------------
 const finalizarCompra = async () => {
     const carritoToMP = carrito.map((prod) => {
       return {
@@ -130,7 +116,6 @@ const finalizarCompra = async () => {
         unit_price: prod.precioG,
       };
     });
-  
     const resp = await fetch("https://api.mercadopago.com/checkout/preferences", {
       method: "POST",
       headers: {
@@ -146,6 +131,5 @@ const finalizarCompra = async () => {
       }),
     });
     const data = await resp.json();
-  
     window.location.replace(data.init_point);
   };
